@@ -1,10 +1,8 @@
 
-import ShowUser from './components/Day2';
+import UserCard from './components/Day3.jsx';
 
 export default function App() {
   return (
-    <div>
-      <ShowUser />
-    </div>
+      <UserCard />
   )
 }
