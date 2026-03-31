@@ -1,8 +1,10 @@
 
-import HexadecimalContainers from './components/Day-6/Day6';
+import Header from './components/Day-8/Day8';
 
 export default function App() {
+
+
   return (
-      <HexadecimalContainers />
+      <Header />
   )
 }

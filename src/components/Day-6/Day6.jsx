@@ -99,4 +99,30 @@ const HexadecimalContainers = () => {
     )
 }
 
-export default HexadecimalContainers;
+
+//3
+
+
+const CountryGraph = ({country, population}) => {
+    return (
+        <div className="flex w-full gap-8">
+            <h1 className="min-w-1/7 max-w-1/7">{country.toUpperCase()}</h1>
+            <div className="bg-orange-400 h-8" style={{ width: `${(population / 7693165599) * 100}%`}}></div>
+            <h1 className="ml-auto text-left">{population}</h1>
+        </div>
+    )
+}
+
+const Main = ({data}) => {
+    return (
+         <div className="flex flex-col items-center p-12">
+            <h1 className="font-mono font-bold text-6xl">30 Days of React</h1>
+            <h1 className="font-mono text-2xl">World Population</h1>
+            <div className="flex justify-center w-[1120px] flex-wrap my-0 mx-auto gap-2 py-6 font-mono">
+                {data.map(({country, population}) => <CountryGraph key={country} country={country} population={population} />)}
+            </div>
+        </div>
+    )
+}
+
+export default Main;
