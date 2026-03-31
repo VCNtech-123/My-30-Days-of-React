@@ -1,8 +1,8 @@
 
-import RandomColorCard from './components/Day-4/Day4';
+import NumberContainer from './components/Day-6/Day6';
 
 export default function App() {
   return (
-      <RandomColorCard />
+      <NumberContainer />
   )
 }
