@@ -32,7 +32,7 @@ const colorValidator = (num) => {
 
 const NumberCard = ({ number }) => {
     return (
-        <div key={number} className={`${colorValidator(number)} p-9 min-h-40 min-w-40 flex items-center justify-center font-bold font-mono`}>
+        <div className={`${colorValidator(number)} p-9 min-h-40 min-w-40 flex items-center justify-center font-bold font-mono`}>
             {number}
         </div>
     )
@@ -51,10 +51,52 @@ const NumberContainer = () => {
             <h1 className="font-mono text-2xl">Number Generator</h1>
             <div className="flex justify-center w-[1120px] flex-wrap my-0 mx-auto gap-2 py-6">
                 
-                {numbers.map(num => <NumberCard number={num} />)}
+                {numbers.map(num => <NumberCard key={num} number={num} />)}
             </div>
         </div>
     )
 }
 
-export default NumberContainer;
+//2
+
+const randomColor = () => {
+    let hex = '123456789ABCDEF';
+    let color = '';
+
+    for (let i = 0; i < 6; i++) {
+        const index = Math.floor(Math.random() * hex.length);
+        color += hex[index];
+    }
+
+    return '#' + color;
+}
+
+
+const HexCard = ({ color }) => {
+    return (
+        <div className={`p-9 min-h-40 min-w-40 flex items-center justify-center font-bold font-mono`} style={{backgroundColor: color}}>
+            {color}
+        </div>
+    )
+}
+
+const colorCard = [];
+
+for (let i = 0; i < 100; i++) {
+    colorCard.push(randomColor());
+}
+
+const HexadecimalContainers = () => {
+    console.log(colorCard);
+    return (
+        <div className="flex flex-col items-center p-12">
+            <h1 className="font-mono font-bold text-6xl">30 Days of React</h1>
+            <h1 className="font-mono text-2xl">Hexadecimal Colors</h1>
+            <div className="flex justify-center w-[1120px] flex-wrap my-0 mx-auto gap-2 py-6">
+                {colorCard.map(hex => <HexCard key={hex} color={hex} />)}
+            </div>
+        </div>
+    )
+}
+
+export default HexadecimalContainers;
