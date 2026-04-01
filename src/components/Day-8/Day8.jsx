@@ -118,3 +118,50 @@ class Application extends React.Component {
 }
 
 export default Application;
+
+//2 
+
+  const fetchC = async () => {
+    try {
+        const response = await fetch('https://restcountries.com/v3.1/all?fields=name,flags,capital,languages,population,currencies');
+        const data = await response.json();
+        return data;
+    }
+    catch (e) {
+        console.error(e);
+        return [];
+    }
+}
+
+data = [];
+
+(async ()=> {
+    data = await fetchC();
+    console.log(data);
+})()
+
+
+class CountryCard extends React.Component {
+    constructor (props) {
+        super(props)
+    }
+
+    state = {
+        country: [...data]
+    }
+
+    render () {
+        const { } = this.state.movies
+        return (
+            <div className="min-h-screen">
+                <Header />
+                <div className="flex justify-center items-center">
+                    <div className="flex flex-col">
+                        <img src="" alt="" className="" />
+
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
