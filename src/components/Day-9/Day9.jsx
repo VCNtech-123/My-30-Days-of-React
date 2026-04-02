@@ -79,12 +79,29 @@ class Main extends React.Component {
 class Application extends React.Component {
 
     state = {
-        season: 'Spring';
+        season: 'spring',
     }
 
     showTime = () => {
         const now = new Date();
-        this.setState({ time: now.getHours() })
+        const time = now.getMonth() + 1
+
+        if (time > 2 && time < 6) {
+            this.setState( {season: 'spring'} )
+        }
+        else if (time > 5 && time < 9) {
+            this.setState( {season: 'summer'} )
+        }
+        else if (time > 8 && time < 12) {
+            this.setState( {season: 'autumn'});
+        }
+        else {
+            this.setState( {season: 'winter'} )
+        }
+    }
+
+    componentDidMount() {
+        this.timerID = setInterval(this.showTime, 1000)
     }
 
 
@@ -92,20 +109,24 @@ class Application extends React.Component {
     render () {
         const techs = ['HTML', 'CSS', 'Javascript'];
 
-        const season = [
+        const season = {
             spring: { backgroundColor: 'orange' },
+            autumn: { backgroundColor: 'red' },
+            winter: { backgroundColor: 'lightblue' },
+            summer: { backgroundColor: 'yellow' }
+        }
             
-        ]
-
-        
         return (
-            
-            <div style={{ ...this.state.bg, ...this.state.textColor}}>
-                <Header bground={{...this.state.bg}} />
+            <div style={season[this.state.season]}>
+                <Header bground={season[this.state.season]} />
                 <Main techs={techs} picture={Picture}/>
                 <Footer />
             </div>
         )
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
     }
 }
 
