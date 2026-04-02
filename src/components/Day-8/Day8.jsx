@@ -117,7 +117,7 @@ class Application extends React.Component {
     }
 }
 
-export default Application;
+
 
 //2 
 
@@ -133,7 +133,7 @@ export default Application;
     }
 }
 
-data = [];
+let data = [];
 
 (async ()=> {
     data = await fetchC();
@@ -147,21 +147,56 @@ class CountryCard extends React.Component {
     }
 
     state = {
-        country: [...data]
+        country: {}
+    }
+
+    randomCountry = (countries) => {
+        const randomC = countries[Math.floor(Math.random() * countries.length)];
+        this.setState({ country: randomC });
     }
 
     render () {
-        const { } = this.state.movies
-        return (
-            <div className="min-h-screen">
-                <Header />
-                <div className="flex justify-center items-center">
-                    <div className="flex flex-col">
-                        <img src="" alt="" className="" />
 
+    const { country } = this.state;
+    const hasData = country.name; 
+    const currency = hasData ? Object.values(country.currencies)[0] : null;
+    const arrayLang = hasData? Object.values(country.languages) : []
+    const language = arrayLang[1] || arrayLang[0]
+
+    return (
+        <div className="min-h-screen">
+            <Header />
+            <div className="flex flex-col justify-center items-center font-mono gap-4">
+                
+                {hasData ? (
+                    <div className="flex flex-col gap-4 justify-center items-center bg-yellow-300 p-4 min-w-120 max-h-120">
+                        <div className="flex flex-col items-center justify-center p-4">
+                            <img src={country.flags.png} alt="flag" className="max-w-30" />
+                            <h1 className="font-bold text-2xl">{country.name.official}</h1>
+                        </div>
+                        <div className="">
+                            <h2 className="font-bold">Capital: <span className="font-normal">{country.capital}</span></h2> 
+                            <h2 className="font-bold">Currency: <span className="font-normal">{currency?.name} ({currency?.symbol})</span></h2> 
+                            <h2 className="font-bold">Population: <span className="font-normal">{country.population}</span></h2> 
+                            <h2 className="font-bold">Language: <span className="font-normal">{language}</span></h2> 
+                        </div>
                     </div>
+                ) : (
+                    <p>Please click the button to select a country!</p>
+                )}
+
+                <div className="">
+                    <Button 
+                        text={'Select Country'} 
+                        style={'px-8 py-2 bg-blue-400 rounded-lg'} 
+                        func={() => this.randomCountry(data)} 
+
+                    />
                 </div>
             </div>
-        )
+        </div>
+    );
     }
 }
+
+export default CountryCard;
